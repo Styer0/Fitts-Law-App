@@ -8,7 +8,7 @@ BEFORE RUNNING THE PROGRAM: You must create a Virtual Environment in order for t
 ```
 * Windows
 ```python
-   .\venv\Scripts\activate"
+   .\venv\Scripts\activate
 ```
 * Linux
 ```python
