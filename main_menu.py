@@ -8,21 +8,29 @@ class MainMenu:
         master.geometry('1200x900')
         
         title_label = tk.Label(master, text="Fitts Law Game!", font=myFont)
-        title_label.pack(pady=200)
+        title_label.pack(pady=150)
+
+        start_btn = tk.Button(master, text="Start", command=self.start_game)
+        start_btn['font'] = myFont
+        start_btn.pack(pady=25)
         
-        start_btn = ""
-        settings_btn = ""
+        settings_btn = tk.Button(master, text="Difficulty Setting", command=self.diff_set)
+        settings_btn['font'] = myFont
+        settings_btn.pack(pady=25)
         
         exit_btn = tk.Button(master, text="Exit", command=self.exit_app)
         exit_btn['font'] = myFont
-        exit_btn.pack(pady=10)
-        
+        exit_btn.pack(pady=25)
+    
+    #start the fitts law trial
     def start_game(self):
         print("")
     
+    #settings that allow you to change the difficulty from 2 to 6
     def diff_set(self):
         print("")
-    
+
+    #exit the program
     def exit_app(self):
         self.master.destroy()
     
