@@ -1,4 +1,5 @@
 import tkinter as tk
+from obj_form import ObjForm
 
 myFont = ("Consolas", 20)
 class MainMenu:
@@ -24,7 +25,9 @@ class MainMenu:
     
     #start the fitts law trial
     def start_game(self):
-        print("")
+        self.obj_form = tk.Toplevel(self.master)
+        self.master.withdraw()
+        ObjForm(self.obj_form, self)
     
     #settings that allow you to change the difficulty from 2 to 6
     def diff_set(self):
