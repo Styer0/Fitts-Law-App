@@ -1,5 +1,6 @@
 import tkinter as tk
 from obj_form import ObjForm
+from settings import Settings
 
 myFont = ("Consolas", 20)
 class MainMenu:
@@ -31,7 +32,9 @@ class MainMenu:
     
     #settings that allow you to change the difficulty from 2 to 6
     def diff_set(self):
-        print("")
+        self.sett_form = tk.Toplevel(self.master)
+        self.master.withdraw()
+        Settings(self.sett_form, self)
 
     #exit the program
     def exit_app(self):
