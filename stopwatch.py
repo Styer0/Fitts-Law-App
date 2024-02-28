@@ -9,6 +9,9 @@ class Stopwatch:
     
     def stopTime(self):
         self.end_time = time.time()
+
+    def elapsed_time(self):
+        return self.end_time - self.start_time
     
     def reset(self):
         self.start_time = 0
