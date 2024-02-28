@@ -6,10 +6,10 @@ myFont = ("Consolas", 20)
 class MainMenu:
     def __init__(self, master):
         self.master = master
-        master.title("Fitts Law Game")
+        master.title("Fitts Law Experiment!")
         master.geometry('1200x900')
         
-        title_label = tk.Label(master, text="Fitts Law Game!", font=myFont)
+        title_label = tk.Label(master, text="Fitts Law Experiment!", font=myFont)
         title_label.pack(pady=150)
 
         start_btn = tk.Button(master, text="Start", command=self.start_game)
