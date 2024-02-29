@@ -6,11 +6,13 @@ myFont = ("Consolas", 13)
 
 class ResultsForm:
     def __init__(self, master, obj_form, recorded_time, click_timestamps, diff_multi, trial_count):
+        # Inital variables
         self.master = master
         self.obj_form = obj_form
         self.recorded_time = recorded_time
         self.click_timestamps = click_timestamps
-
+        
+        # form adjusted accordingly to the size of the users monitor
         master.title("Fitts Law Experiment - Results")
         screen_width = master.winfo_screenwidth()
         screen_height = master.winfo_screenheight()
@@ -46,11 +48,12 @@ class ResultsForm:
         time_warning_label.pack(pady=10)
         recorded_time_label.pack(pady=5)
 
-
+    # Start a new trial after showing results
     def back_obj(self):
         self.master.destroy()
         self.obj_form.master.deiconify()
-        
+    
+    # Show the completion screen after Difficulty 6: Trial 3
     def completion(self):
         self.completion_form = tk.Toplevel(self.master)
         self.master.withdraw()

@@ -7,6 +7,7 @@ def set_forms(root, main_menu, obj_form, results_form, completion_form):
     results_form_global = results_form
     completion_form_global = completion_form
 
+# Stops all the programs and windows from running
 def stop_program():
     if root_global:
         root_global.destroy()

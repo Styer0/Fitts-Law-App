@@ -5,6 +5,7 @@ from obj_form import ObjForm
 myFont = ("Consolas", 20)
 class MainMenu:
     def __init__(self, master):
+        # Tkinter variables
         self.master = master
         master.title("Fitts Law Experiment")
         screen_width = master.winfo_screenwidth()
@@ -31,6 +32,3 @@ class MainMenu:
     #exit the program
     def exit_app(self):
         self.master.destroy()
-    
-
-        

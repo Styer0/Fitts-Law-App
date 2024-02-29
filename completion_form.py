@@ -21,8 +21,9 @@ class completionForm:
         exit_btn['font'] = myFont
         exit_btn.pack(pady=15)
         
-        #Prevent program from not completely exiting out
+        #Prevention of application not exiting propertly
         master.protocol("WM_DELETE_WINDOW", self.exitApp)
     
+    # Exits the entire program
     def exitApp(self):
          app_logic.stop_program()

@@ -23,12 +23,13 @@ class ObjForm:
         self.max_trials = 3   # Set the maximum number of trials
         self.diff_multi = 1 # The difficulty multiplier
         
+        # form adjusted accordingly to the size of the users monitor
         master.title("Fitts Law Experiment")
         screen_width = master.winfo_screenwidth()
         screen_height = master.winfo_screenheight()
         master.geometry(f"{screen_width}x{screen_height}+0+0")
         
-        #Button to switch back to the main menu form
+        # Button to switch back to the main menu form
         back_btn = tk.Button(master, text="Quit", command=self.back_mm)
         back_btn['font'] = myFont
         back_btn.pack(side=tk.TOP, anchor=tk.NE, padx=10,pady=15)
@@ -41,18 +42,21 @@ class ObjForm:
         self.Rbox_pos_label.pack(pady=5)
         self.distance_label.pack(pady=5)
         
+        # Tip and difficulty indicator
         self.tip_label = tk.Label(master, text="For the best experience, please fullscreen the application!", font=("Consolas", 10))
         self.tip_label.pack(pady=10)
         self.title_label = tk.Label(master, text=f"Difficulty {self.diff_multi+1}: Trial 1", font=myFont)
         self.title_label.pack(pady=10)
         
+        # Shows the stopwatch timer of the overall trial
         self.elapsed_time_label = tk.Label(master, text="", font = myFont)
         self.elapsed_time_label.pack(pady=10)
         
+        # Counts the amount of clicks on the boxes
         self.clicks_label = tk.Label(master, text="", font=myFont)
         self.clicks_label.pack(pady=10)
         
-
+        # Calls the draw_boxes function
         self.draw_boxes()
 
         #Prevent program from not completely exiting out
@@ -82,13 +86,15 @@ class ObjForm:
 
     # Draw the boxes and apply a function
     def draw_boxes(self):
+        # Inital box heigh and width
         box_width = 350
         box_height = 350
         
-        #Left box coordinates
+        # Inital left box coordinates
         left_box_x1 = 350
         left_box_y1 = 400
         
+        # Inital Right box coordinates
         right_box_x1 = 1200
         right_box_y1 = 400
         
@@ -108,33 +114,29 @@ class ObjForm:
     
     # Start the timer and records right to left actions
     def start_stopwatch_left(self):
-        if self.left_press_count == 0:
+        
+        if self.left_press_count == 0: # Starts the timer 
             self.stopwatch.startTime()
             self.timer()
-            #self.left_press_count += 1
-            #self.record_clicks()
-            #self.record_timestamp()
-        else:
+        else: # record actions right to left
             self.record_clicks()
             self.record_timestamp()
-        
+
         self.left_press_count += 1
 
     # Records a time from left to right actions
     def record_right_press(self):
+        # Prevents overclicking of the right box
         if self.left_press_count > self.right_press_count:
             self.right_press_count += 1
             self.record_clicks()
             self.record_timestamp()
         
+        # if-statement for whenever right press count is over 5
         if self.right_press_count > 5:
             self.stopwatch.stopTime()
             self.recorded_time = self.stopwatch.elapsed_time()
             self.reset_timer()
-            #if (self.diff_multi == 5) & (self.trial_count == 3):
-            #    self.completion()
-            #else:
-            #    self.showResult()
             self.showResult()
     
     # Records the total clicks
@@ -173,24 +175,31 @@ class ObjForm:
     # Start a new trial with boxes in random position and width.
     def startNewTrial(self):
         
+        # New coordinates for left box based on difficulty and randomness
         new_left_x = (1/self.diff_multi) * random.randint(300, 600)
         new_left_y = random.randint(400, 800)
         
+        # New coordinates for right box based on difficulty and randomness
         new_right_x = (self.diff_multi*75) + random.randint(1200, 1400)
         new_right_y = random.randint(400, 700)
         
+        # New sizes for the boxes based on difficulty and randomness
         new_width = (1/self.diff_multi) * random.randint(250, 300) + 10
         new_height = (1/self.diff_multi)* random.randint(250, 300) + 10
         
+        # configures the boxes to its new variables
         self.left_box.place_configure(x=new_left_x, y=new_left_y, width=new_width, height=new_height) 
         self.right_box.place_configure(x=new_right_x, y=new_right_y, width=new_width, height=new_height)
        
+        # configures the label to match the boxes new variables
         self.Lbox_pos_label.config(text=f"x: {new_left_x}, y: {new_left_y}, Width: {new_width}, Height: {new_height}")
         self.Rbox_pos_label.config(text=f"x: {new_right_x}, y: {new_right_y}, Width: {new_width}, Height: {new_height}")
         
+        # calculates the distance of the newly positioned boxes
         distance = math.sqrt((new_right_x - new_left_x)**2 + (new_right_y - new_left_y)**2)
         self.distance_label.config(text="Distance:  {:.2f} ".format(distance))
         
+        # the usual reset trial and recordings.
         self.reset_timer()
         self.recorded_time = 0
         self.click_timestamps = []
