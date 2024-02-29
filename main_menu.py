@@ -1,3 +1,4 @@
+#main_menu.py - Ethan Nguyen
 import tkinter as tk
 from obj_form import ObjForm
 
@@ -5,8 +6,10 @@ myFont = ("Consolas", 20)
 class MainMenu:
     def __init__(self, master):
         self.master = master
-        master.title("Fitts Law Experiment!")
-        master.geometry('1200x900')
+        master.title("Fitts Law Experiment")
+        screen_width = master.winfo_screenwidth()
+        screen_height = master.winfo_screenheight()
+        master.geometry(f"{screen_width}x{screen_height}+0+0")
         
         title_label = tk.Label(master, text="Fitts Law Experiment!", font=myFont)
         title_label.pack(pady=150)

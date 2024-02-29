@@ -1,3 +1,4 @@
+#stopwatch.py - Ethan Nguyen
 import time
 
 class Stopwatch:

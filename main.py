@@ -1,3 +1,4 @@
+#main.py - Ethan Nguyen
 import tkinter as tk
 from main_menu import MainMenu
 
