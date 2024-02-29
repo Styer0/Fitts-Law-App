@@ -1,6 +1,7 @@
 import tkinter as tk
 import time
 from stopwatch import Stopwatch
+from result_form import ResultsForm
 
 myFont = ("Consolas", 13)
 class ObjForm:
@@ -8,7 +9,8 @@ class ObjForm:
         self.master = master
         self.main_menu = main_menu
         self.stopwatch = Stopwatch()
-        
+        self.click_timestamps = [] #Stores the recorded time of each actions
+                
         master.title("Fitts Law Game")
         master.geometry('1200x900')
 
@@ -26,6 +28,8 @@ class ObjForm:
         self.boxclick = 0
         self.left_press_count = 0
         self.right_press_count = 0
+        self.recorded_time = 0
+        self.prev_timestamp = None
         
         self.draw_boxes()
 
@@ -37,6 +41,11 @@ class ObjForm:
         self.master.destroy()
         self.main_menu.master.deiconify()
     
+    def showResult(self):
+        self.result_form = tk.Toplevel(self.master)
+        self.master.withdraw()
+        ResultsForm(self.result_form, self, self.recorded_time)
+        
     def draw_boxes(self):
         box_width = 50
         box_height = 25
@@ -66,19 +75,25 @@ class ObjForm:
         if self.left_press_count == 0:
             self.stopwatch.startTime()
             self.timer()
+            #self.left_press_count += 1
+            #self.record_clicks()
+            #self.record_timestamp()
+        else:
+            self.record_clicks()
+            self.record_timestamp()
         self.left_press_count += 1
-        self.record_clicks()
         
             
     def record_right_press(self):
         self.right_press_count += 1
         self.record_clicks()
+        self.record_timestamp()
         
-        if self.right_press_count >= 5:
+        if self.right_press_count >= 6:
             self.stopwatch.stopTime()
-            recorded_time = self.stopwatch.elapsed_time()
-            self.display_recorded_time(recorded_time)
+            self.recorded_time = self.stopwatch.elapsed_time()
             self.reset_timer()
+            self.showResult()
             
     def record_clicks(self):
         self.boxclick += 1
@@ -98,5 +113,13 @@ class ObjForm:
         self.elapsed_time_label.config(text="")
         self.clicks_label.config(text="Clicks: 0")
 
-    def display_recorded_time(self, recorded_time):
-        print("Recorded Time:", recorded_time)
+    def record_timestamp(self):
+        # Record the timestamp for each press
+        timestamp = time.time()
+        self.click_timestamps.append(timestamp)
+
+        if self.prev_timestamp is not None:
+            time_interval = timestamp - self.prev_timestamp
+            print(f"Time Interval {len(self.click_timestamps) - 2}-{len(self.click_timestamps) - 1}: {time_interval:.2f} seconds")
+
+        self.prev_timestamp = timestamp
