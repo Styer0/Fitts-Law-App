@@ -142,7 +142,7 @@ class ObjForm:
     # Records the total clicks
     def record_clicks(self):
         self.boxclick += 1
-        self.clicks_label.config(text="Clicks: {:}" .format(self.boxclick))
+        self.clicks_label.config(text=f"Clicks: {self.boxclick}")
     
     # Stopwatch timer
     def timer(self):
@@ -192,12 +192,12 @@ class ObjForm:
         self.right_box.place_configure(x=new_right_x, y=new_right_y, width=new_width, height=new_height)
        
         # configures the label to match the boxes new variables
-        self.Lbox_pos_label.config(text=f"x: {new_left_x}, y: {new_left_y}, Width: {new_width}, Height: {new_height}")
-        self.Rbox_pos_label.config(text=f"x: {new_right_x}, y: {new_right_y}, Width: {new_width}, Height: {new_height}")
+        self.Lbox_pos_label.config(text=f"x: {new_left_x}, y: {new_left_y:.2f}, Width: {new_width:.2f}, Height: {new_height:.2f}")
+        self.Rbox_pos_label.config(text=f"x: {new_right_x}, y: {new_right_y:.2f}, Width: {new_width:.2f}, Height: {new_height:.2f}")
         
         # calculates the distance of the newly positioned boxes
         distance = math.sqrt((new_right_x - new_left_x)**2 + (new_right_y - new_left_y)**2)
-        self.distance_label.config(text="Distance:  {:.2f} ".format(distance))
+        self.distance_label.config(text="Distance: {:.2f} ".format(distance))
         
         # the usual reset trial and recordings.
         self.reset_timer()
