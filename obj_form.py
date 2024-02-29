@@ -30,8 +30,8 @@ class ObjForm:
         back_btn['font'] = myFont
         back_btn.pack(side=tk.TOP, anchor=tk.NE, padx=10,pady=15)
         
-        self.Lbox_pos_label = tk.Label (master, text="Left box: x: , y: , width: ", font=("Consolas", 8))
-        self.Rbox_pos_label = tk.Label (master, text="Right box: x: , y: , width: ", font=("Consolas", 8))
+        self.Lbox_pos_label = tk.Label (master, text="Left box: x: , y: , Width: ,Height: ", font=("Consolas", 8))
+        self.Rbox_pos_label = tk.Label (master, text="Right box: x: , y: , Width: ,Height: ", font=("Consolas", 8))
         self.distance_label = tk.Label (master, text="Distance: ", font=("Consolas", 8))
         self.Lbox_pos_label.pack(pady=5)
         self.Rbox_pos_label.pack(pady=5)
@@ -68,27 +68,27 @@ class ObjForm:
             self.startNewTrial()
         
     def draw_boxes(self):
-        box_width = 50
-        box_height = 25
+        box_width = 350
+        box_height = 350
         
         #Left box coordinates
-        left_box_x1 = 50
+        left_box_x1 = 350
         left_box_y1 = 300
         
-        right_box_x1 = 1500
+        right_box_x1 = 1200
         right_box_y1 = 300
         
         # Draw left box
-        self.left_box = tk.Label(self.master, text="Left Box", bg="blue", width=box_width, height=box_height)
-        self.left_box.place(x=left_box_x1, y=left_box_y1)
+        self.left_box = tk.Label(self.master, text="Left Box", bg="blue")
+        self.left_box.place(x=left_box_x1, y=left_box_y1, width=box_width, height=box_height)
         self.left_box.bind('<Button-1>', lambda event: self.start_stopwatch_left())
-        self.Lbox_pos_label.config(text=f"x: {left_box_x1}, y: {left_box_y1}, Width: {box_width}")
+        self.Lbox_pos_label.config(text=f"x: {left_box_x1}, y: {left_box_y1}, Width: {box_width}, Height: {box_height}")
         
         # Draw right box
-        self.right_box = tk.Label(self.master, text="Right Box", bg="red", width=box_width, height=box_height)
-        self.right_box.place(x=right_box_x1, y=right_box_y1)
+        self.right_box = tk.Label(self.master, text="Right Box", bg="red")
+        self.right_box.place(x=right_box_x1, y=right_box_y1, width=box_width, height=box_height)
         self.right_box.bind('<Button-1>', lambda event: self.record_right_press())
-        self.Rbox_pos_label.config(text=f"x: {right_box_x1}, y: {right_box_y1}, Width: {box_width}")
+        self.Rbox_pos_label.config(text=f"x: {right_box_x1}, y: {right_box_y1}, Width: {box_width}, Height: {box_height}")
         distance = right_box_x1 - left_box_x1
         self.distance_label.config(text=f"Distance: {distance}")
     
@@ -148,17 +148,17 @@ class ObjForm:
     def startNewTrial(self):
         
         new_left_x = random.randint(50, 600)
-        new_left_y = random.randint(300, 1000)
+        new_left_y = random.randint(300, 700)
         new_right_x = random.randint(900, 1600)
-        new_right_y = random.randint(300, 900)
-        new_width = random.randint(100, 200)
-        new_height = random.randint(50, 150)
+        new_right_y = random.randint(300, 700)
+        new_width = random.randint(300, 350)
+        new_height = random.randint(300, 350)
         
         self.left_box.place_configure(x=new_left_x, y=new_left_y, width=new_width, height=new_height) 
         self.right_box.place_configure(x=new_right_x, y=new_right_y, width=new_width, height=new_height)
        
-        self.Lbox_pos_label.config(text=f"x: {new_left_x}, y: {new_left_y}, Width: {new_width}")
-        self.Rbox_pos_label.config(text=f"x: {new_right_x}, y: {new_right_y}, Width: {new_width}")
+        self.Lbox_pos_label.config(text=f"x: {new_left_x}, y: {new_left_y}, Width: {new_width}, Height: {new_height}")
+        self.Rbox_pos_label.config(text=f"x: {new_right_x}, y: {new_right_y}, Width: {new_width}, Height: {new_height}")
         
         distance = math.sqrt((new_right_x - new_left_x)**2 + (new_right_y - new_left_y)**2)
         self.distance_label.config(text="Distance:  {:.2f} ".format(distance))
