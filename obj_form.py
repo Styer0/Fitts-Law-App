@@ -25,10 +25,10 @@ class ObjForm:
         
         # form adjusted accordingly to the size of the users monitor
         master.title("Fitts Law Experiment")
-        screen_width = master.winfo_screenwidth()
-        screen_height = master.winfo_screenheight()
-        master.geometry(f"{screen_width}x{screen_height}+0+0")
-        
+        self.screen_width = master.winfo_screenwidth()
+        self.screen_height = master.winfo_screenheight()
+        master.geometry(f"{self.screen_width}x{self.screen_height}+0+0")
+        print(f"Screen: {self.screen_width} and {self.screen_height}")
         # Button to switch back to the main menu form
         back_btn = tk.Button(master, text="Quit", command=self.back_mm)
         back_btn['font'] = myFont
@@ -91,12 +91,12 @@ class ObjForm:
         box_height = 350
         
         # Inital left box coordinates
-        left_box_x1 = 350
-        left_box_y1 = 400
+        left_box_x1 = self.screen_width - 1200
+        left_box_y1 = self.screen_height - 500
         
         # Inital Right box coordinates
-        right_box_x1 = 1200
-        right_box_y1 = 400
+        right_box_x1 = self.screen_width - 500
+        right_box_y1 = self.screen_height - 500
         
         # Draw left box
         self.left_box = tk.Label(self.master, text="Left Box", bg="blue")
@@ -176,12 +176,12 @@ class ObjForm:
     def startNewTrial(self):
         
         # New coordinates for left box based on difficulty and randomness
-        new_left_x = (1/self.diff_multi) * random.randint(300, 600)
-        new_left_y = random.randint(400, 800)
+        new_left_x = (1/self.diff_multi) * random.randint(200, self.screen_width - 1000)
+        new_left_y = random.randint(self.screen_height - 600, self.screen_height - 300)
         
         # New coordinates for right box based on difficulty and randomness
-        new_right_x = (self.diff_multi*75) + random.randint(1200, 1400)
-        new_right_y = random.randint(400, 700)
+        new_right_x = (self.diff_multi*75) + random.randint(self.screen_width - 600, self.screen_width - 400)
+        new_right_y = random.randint(self.screen_height - 600, self.screen_height - 300)
         
         # New sizes for the boxes based on difficulty and randomness
         new_width = (1/self.diff_multi) * random.randint(250, 300) + 10
