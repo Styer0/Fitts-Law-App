@@ -1,7 +1,7 @@
 # Fitts Law Assignment
 Fitts Law Assignment for CS-4063 - Human Computer Interactions
 
-BEFORE RUNNING THE PROGRAM: You must create a Virtual Environment in order for this program to work properly!
+If you are wanting to edit this project and run it: You must create a Virtual Environment in order for this program to work properly.
 1. Whenever you're in the program's directory, run these commands in the console:
 ```python
 python -m venv venv
